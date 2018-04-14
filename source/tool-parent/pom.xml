@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.chenliwei.tool</groupId>
+    <artifactId>tool-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <name>tool-parent</name>
+    <url>http://maven.apache.org</url>
+
+    <!-- maven仓库 -->
+    <!--<repositories>
+        <repository>
+            <id>nutz</id>
+            <url>https://jfrog.nutz.cn/artifactory/jcenter</url>
+        </repository>
+        <repository>
+            <id>nutz-snapshots</id>
+            <url>https://jfrog.nutz.cn/artifactory/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>github-releases</id>
+            <url>http://oss.sonatype.org/content/repositories/github-releases/</url>
+        </repository>
+        <repository>
+            <id>clojars.org</id>
+            <url>http://clojars.org/repo</url>
+        </repository>
+    </repositories>-->
+
+    <!-- 分发至远程仓库 -->
+    <!--
+    <distributionManagement>
+        <snapshotRepository>
+            <id>Snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://121.40.56.224:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>yibank</id>
+            <name>yibank repository</name>
+            <url>http://121.40.56.224:8081/nexus/content/repositories/yibank/</url>
+        </repository>
+    </distributionManagement>
+    -->
+
+    <properties>
+		<jackson-version>2.9.4</jackson-version>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <!-- 父项目这里应该是使用dependencyManagement的。
+    但是为了开发调试方便，方便排查包依赖错误，先使用 dependencies方式，
+    等后期jar包依赖稳定后再更改为dependencyManagement -->
+    <!-- <dependencyManagement></dependencyManagement> -->
+    <dependencies>
+					<!-- jackson -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-jsr310</artifactId>
+				<version>${jackson-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-xml</artifactId>
+				<version>${jackson-version}</version>
+			</dependency>
+		
+        <!-- 解决Missing artifact问题，也可以解决maven jetty插件运行错误等问题，还可以解决一些莫名其妙的问题 -->
+        <dependency>
+            <groupId>jdk.tools</groupId>
+            <artifactId>jdk.tools</artifactId>
+            <version>1.8</version>
+            <scope>system</scope>
+            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+        </dependency>
+
+        <!-- web项目依赖，主要是解决项目中使用了request和response、session等原生对象找不到类的问题 -->
+        <!--<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>-->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- spring mvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+        <!-- spring jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+        <!-- spring context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+        <!-- spring jms -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jms</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+        <!-- spring test -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+        <!-- spring aop需要的jar -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.10</version>
+        </dependency>
+
+        <!-- log4j2日志依赖 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.22</version>
+        </dependency>
+        <!-- log4j2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <!-- 用于slf4j与log4j2桥接 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <!-- commons-logging与log4j2桥接 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-jcl</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <!-- web工程需要的log4j2 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-web</artifactId>
+            <version>2.7</version>
+        </dependency>
+        <!-- 这个包为了兼容以前项目的日志 -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-1.2-api</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+        <!-- junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- junit assertThat的时候使用的包 -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- jackson springmvc的@ResponseBody使用的依赖包 json/xml转换工具类 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.8.5</version>
+        </dependency>
+
+        <!-- nutz -->
+        <dependency>
+            <groupId>org.nutz</groupId>
+            <artifactId>nutz</artifactId>
+            <version>1.r.59</version>
+        </dependency>
+
+        <!-- jFinal -->
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!-- fst序列化工具 -->
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+            <version>2.48</version>
+        </dependency>
+
+        <!-- jodd工具 -->
+        <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd-core</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
+        <!-- commons工具类 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
+
+        <!-- 编码解码工具类 -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+
+        <!-- 阿里巴巴数据源 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.0.27</version>
+        </dependency>
+
+        <!-- mysql驱动类 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!-- 坑人的6版本，需要mysql必须是新版才行 -->
+            <!-- <version>6.0.5</version> -->
+            <version>5.1.40</version>
+        </dependency>
+
+        <!-- mongo驱动 -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+
+        <!-- redis客户端 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+
+        <!-- beetl模版 -->
+        <dependency>
+            <groupId>com.ibeetl</groupId>
+            <artifactId>beetl</artifactId>
+            <version>2.7.5</version>
+        </dependency>
+
+        <!-- javamelody监控 -->
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-core</artifactId>
+            <version>1.62.0</version>
+        </dependency>
+
+        <!-- activeMq -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-pool</artifactId>
+            <version>5.14.3</version>
+        </dependency>
+
+        <!-- solrj -->
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>6.3.0</version>
+        </dependency>
+
+        <!-- quartz -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
+        <!-- mina -->
+        <dependency>
+            <groupId>org.apache.mina</groupId>
+            <artifactId>mina-core</artifactId>
+            <version>2.0.16</version>
+        </dependency>
+
+        <!-- hbase -->
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <version>1.2.4</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- kafka -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.12</artifactId>
+            <version>0.10.1.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- kafka client -->
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <!-- kafka客户端与服务器端版本要对应，否则会出现下面错误 -->
+            <!-- org.apache.kafka.common.protocol.types.SchemaException: Error reading field 'brokers': Error reading field 'host': Error reading string of length 25444, only 88 bytes available -->
+            <!-- 这个版本号对应kafka版本号，例如(kafka_2.11-0.10.1.1)，据我多年临床经验，这个0.10.1.1应该对应才行 -->
+            <version>0.10.1.1</version>
+            <!--<version>0.9.0.1</version>-->
+        </dependency>
+
+        <!-- storm -->
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-core</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <!-- storm整合kafka -->
+        <dependency>
+            <groupId>org.apache.storm</groupId>
+            <artifactId>storm-kafka</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <!-- mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <!-- spring整合mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <!-- mybatis分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+
+        <!-- spring整合shiro -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <!-- shiro整合ehcache -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <compilerVersion>1.8</compilerVersion>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- 跳过单元测试 -->
+                    <skip>true</skip>
+                    <forkMode>once</forkMode>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                </configuration>
+            </plugin>
+
+            <!-- 编译时更改配置文件插件 -->
+            <plugin>
+                <groupId>com.juvenxu.portable-config-maven-plugin</groupId>
+                <artifactId>portable-config-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>replace-package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration/>
+            </plugin>
+        </plugins>
+    </build>
+
+<!--     <modules>
+        <module>sunyu-config</module>
+        <module>sunyu-mapper</module>
+        <module>sunyu-kit</module>
+        <module>sunyu-service</module>
+        <module>sunyu-storm</module>
+        <module>sunyu-controller</module>
+        <module>sunyu-quartz</module>
+        <module>sunyu-web</module>
+    </modules> -->
+
+</project>
