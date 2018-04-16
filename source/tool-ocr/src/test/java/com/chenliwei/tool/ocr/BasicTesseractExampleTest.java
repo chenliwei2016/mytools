@@ -21,7 +21,7 @@ public class BasicTesseractExampleTest {
         }
         
         //传输文件使用base64把二进制转换为64个可见字符
-        
+        //TODO 从内存中读取二进制流，这个在Base64Test中已经实现
        // pixReadMem();
         
         // Open input image with leptonica library
