@@ -97,7 +97,7 @@
 				<version>${jackson-version}</version>
 			</dependency>
 		
-        <!-- 解决Missing artifact问题，也可以解决maven jetty插件运行错误等问题，还可以解决一些莫名其妙的问题 -->
+<!--         解决Missing artifact问题，也可以解决maven jetty插件运行错误等问题，还可以解决一些莫名其妙的问题
         <dependency>
             <groupId>jdk.tools</groupId>
             <artifactId>jdk.tools</artifactId>
@@ -105,7 +105,7 @@
             <scope>system</scope>
             <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
         </dependency>
-
+ -->
         <!-- web项目依赖，主要是解决项目中使用了request和response、session等原生对象找不到类的问题 -->
         <!--<dependency>
             <groupId>javax.servlet</groupId>
