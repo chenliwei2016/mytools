@@ -26,7 +26,7 @@ public class ScreenCaptureTest {
 		Dimension d = new Dimension(250,26);
 		screenRect = new Rectangle(p,d);
 		BufferedImage capture = new Robot().createScreenCapture(screenRect);
-		ImageIO.write(capture, "bmp", new File("C:\\Users\\leavy\\Downloads\\screenshot.png"));
+		ImageIO.write(capture, "bmp", new File("C:\\Users\\Chenliwei\\Downloads\\screenshot.png"));
 	}
 	
 }
